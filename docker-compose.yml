@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+    dbloja:
+        image: mysql:8.3.0
+        restart: always
+        volumes:
+            - db_mysql:/var/lib/mysql
+        container_name: lojadbmysql
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: "db_loja"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password2024"
+            MYSQL_ROOT_PASSWORD: "password2024r"
+
+volumes:
+    db_mysql:
+        driver: local
