@@ -12,10 +12,12 @@ namespace Loja.Web.Configurations
         public static void AddDataBase(this WebApplicationBuilder builder)
         {
             var connectionString = builder.Configuration.GetConnectionString("WebApiDatabase");
-            builder.Services.AddDbContext<LojaContext>(x => x.UseMySql(
-                connectionString,
-                new MySqlServerVersion(new Version(8, 3, 0)))
-            );
+            builder.Services.AddDbContext<LojaContext>(options => {
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseMySql(
+                    connectionString,
+                    new MySqlServerVersion(new Version(8, 3, 0)));   
+            });
         }
 
         public static void AddMigration(this IHost host)
